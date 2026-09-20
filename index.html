@@ -24,6 +24,7 @@
     --soft: #8a8479;
     --line: #ddd8cf;
     --gold: #a08c6a;
+    --deep: #2f3830;
     --display: "Cormorant Garamond", Georgia, serif;
     --sans: "Jost", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
     --ease: cubic-bezier(.22,1,.36,1);
@@ -49,6 +50,10 @@
   }
   .bar.solid { background: rgb(247 245 241 / .96); color: var(--ink); padding-block: 14px; border-bottom: 1px solid var(--line); backdrop-filter: blur(6px); }
   .bar .mark { font-family: var(--display); font-size: 21px; letter-spacing: .42em; padding-left: .42em; }
+  .bar nav { display: none; gap: clamp(18px, 2.2vw, 34px); }
+  @media (min-width: 1040px) { .bar nav { display: flex; } }
+  .bar nav a { font-size: 10px; letter-spacing: .24em; text-transform: uppercase; opacity: .86; padding-bottom: 3px; border-bottom: 1px solid transparent; transition: opacity .3s var(--ease), border-color .3s var(--ease); }
+  .bar nav a:hover { opacity: 1; border-color: currentColor; }
   .bar .cta {
     font-size: 10px; letter-spacing: .26em; text-transform: uppercase; border: 1px solid currentColor;
     padding: 11px 20px; transition: background .4s var(--ease), color .4s var(--ease), border-color .4s var(--ease);
@@ -85,9 +90,11 @@
   @media (prefers-reduced-motion: reduce) { .rise { opacity: 1; transform: none; } }
 
   /* Statement */
-  .statement { padding: clamp(90px, 13vh, 170px) 0; text-align: center; }
+  .band { background: var(--deep); color: #eeeae2; }
+  .statement { padding: clamp(90px, 14vh, 180px) 0; text-align: center; }
+  .statement .eyebrow { color: rgb(238 234 226 / .62); }
   .statement h2 { margin: 26px auto 0; font-size: clamp(2.1rem, 1rem + 4vw, 4.2rem); max-width: 19ch; }
-  .statement p { margin: 30px auto 0; max-width: 60ch; color: #4b4740; }
+  .statement p { margin: 30px auto 0; max-width: 56ch; color: rgb(238 234 226 / .82); font-size: clamp(.92rem, .85rem + .2vw, 1.02rem); letter-spacing: .04em; }
 
   /* Bungalow chapters */
   .chapter { display: grid; gap: clamp(28px, 5vw, 70px); align-items: center; padding: clamp(40px, 7vh, 90px) 0; }
@@ -178,7 +185,13 @@
 
 <header class="bar">
   <a class="mark" href="#top">AQUA</a>
-  <a class="cta" href="#bungalows">Reservations</a>
+  <nav>
+    <a href="#residence">La Casa</a>
+    <a href="#bungalows">Bungalows</a>
+    <a href="#location">La Madera</a>
+    <a href="#gallery">Gallery</a>
+  </nav>
+  <a class="cta" href="#bungalows">Reserve</a>
 </header>
 
 <section class="hero" id="top">
@@ -194,11 +207,11 @@
 </section>
 
 <main>
-  <section class="wrap statement rise">
+  <div class="band" id="residence"><section class="wrap statement rise">
     <div class="eyebrow">The residence</div>
     <h2 class="display">Three private bungalows, on the sand.</h2>
     <p>Aqua sits directly on La Madera Beach. Restaurants line the shore, the boardwalk to the pier is a short walk, and water taxis leave the dock for Las Gatas. Each bungalow has its own entrance, air conditioning and a view of the water.</p>
-  </section>
+  </section></div>
 
   <div class="wrap" id="bungalows">
     <article class="chapter rise">
@@ -271,7 +284,7 @@
     </div>
   </section>
 
-  <section class="wrap place rise">
+  <section class="wrap place rise" id="location">
     <div>
       <div class="eyebrow">The location</div>
       <h4 class="display">On La Madera, a walk from the pier.</h4>
@@ -284,7 +297,7 @@
     </div>
   </section>
 
-  <section class="wrap rise">
+  <section class="wrap rise" id="gallery">
     <div class="gallery-head">
       <div class="eyebrow">The property</div>
       <div class="eyebrow">Zihuatanejo, Guerrero</div>
