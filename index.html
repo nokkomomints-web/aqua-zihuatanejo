@@ -49,7 +49,21 @@
   }
   .bar.solid { background: rgb(247 245 241 / .96); color: var(--ink); padding-block: 14px; border-bottom: 1px solid var(--line); backdrop-filter: blur(6px); }
   .bar .mark { font-family: var(--display); font-size: 21px; letter-spacing: .42em; padding-left: .42em; }
-  .bar .cta { font-size: 10px; letter-spacing: .28em; text-transform: uppercase; border-bottom: 1px solid currentColor; padding-bottom: 4px; }
+  .bar .cta {
+    font-size: 10px; letter-spacing: .26em; text-transform: uppercase; border: 1px solid currentColor;
+    padding: 11px 20px; transition: background .4s var(--ease), color .4s var(--ease), border-color .4s var(--ease);
+  }
+  .bar .cta:hover { background: var(--gold); border-color: var(--gold); color: #fff; }
+  .bar.solid .cta { border-color: var(--ink); }
+
+  /* Location */
+  .place { display: grid; gap: 34px; padding: clamp(50px, 8vh, 110px) 0; }
+  @media (min-width: 900px) { .place { grid-template-columns: .9fr 1.1fr; gap: 64px; align-items: center; } }
+  .place h4 { font-family: var(--display); font-weight: 300; font-size: clamp(1.9rem, 1.2rem + 2vw, 3rem); margin: 18px 0 0; }
+  .place p { color: #4b4740; max-width: 44ch; }
+  .place .map { aspect-ratio: 16 / 11; border: 1px solid var(--line); filter: grayscale(1) contrast(.95); transition: filter .6s var(--ease); }
+  .place .map:hover { filter: grayscale(0); }
+  .place iframe { width: 100%; height: 100%; border: 0; display: block; }
 
   /* Hero */
   .hero { position: relative; height: 100svh; min-height: 560px; overflow: hidden; display: grid; place-items: center; text-align: center; color: #fff; }
@@ -254,6 +268,19 @@
         <li>Restaurants</li>
         <li>Beach clubs</li>
       </ul>
+    </div>
+  </section>
+
+  <section class="wrap place rise">
+    <div>
+      <div class="eyebrow">The location</div>
+      <h4 class="display">On La Madera, a walk from the pier.</h4>
+      <p>Zihuatanejo sits on a sheltered bay on Mexico's Pacific coast. La Madera is the beach just east of the town centre: swimmable water, restaurants along the sand, and the boardwalk that runs around to the pier and the water taxis.</p>
+      <a class="link" href="https://www.google.com/maps/search/La+Madera+Beach+Zihuatanejo" target="_blank" rel="noopener">Open in maps</a>
+    </div>
+    <div class="map">
+      <iframe title="Map of La Madera Beach, Zihuatanejo" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        src="https://maps.google.com/maps?q=Playa%20La%20Madera%20Zihuatanejo&z=15&output=embed"></iframe>
     </div>
   </section>
 
