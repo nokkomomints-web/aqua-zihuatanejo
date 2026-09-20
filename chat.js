@@ -98,7 +98,7 @@
       <input type="text" placeholder="Type a question" aria-label="Type a question" autocomplete="off">
       <button type="submit" aria-label="Send">Send</button>
     </form>
-    <a class="chatbox-wa" href="#" data-wa>Diego replies personally</a>`;
+    <div class="chatbox-wa">Diego replies personally</div>`;
   document.body.appendChild(panel);
 
   const log = panel.querySelector(".chatbox-log");
