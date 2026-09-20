@@ -3,161 +3,188 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Aqua · Beachfront bungalows on La Madera Beach, Zihuatanejo</title>
-<meta name="description" content="Three private oceanfront bungalows on La Madera Beach in Zihuatanejo, Mexico. Brisas, Oasis, and Olas. Book directly on Airbnb.">
-<meta property="og:title" content="Aqua · La Madera Beach, Zihuatanejo">
-<meta property="og:description" content="Three private beachfront bungalows. Steps from the sand, the boardwalk, and the restaurants of La Madera.">
+<title>Aqua Residence · La Madera Beach, Zihuatanejo</title>
+<meta name="description" content="Three private beachfront bungalows on La Madera Beach, Zihuatanejo. Brisas, Oasis and Olas.">
+<meta property="og:title" content="Aqua Residence · La Madera Beach, Zihuatanejo">
+<meta property="og:description" content="Three private beachfront bungalows, steps from the sand and the boardwalk to the pier.">
 <meta property="og:image" content="https://nokkomomints-web.github.io/aqua-zihuatanejo/img/aqua-sunrise.jpg">
-<meta property="og:image:width" content="1440">
-<meta property="og:image:height" content="1080">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="720">
 <meta property="og:url" content="https://nokkomomints-web.github.io/aqua-zihuatanejo/">
-<meta property="og:site_name" content="Aqua">
-<meta name="twitter:card" content="summary_large_image">
+<meta property="og:site_name" content="Aqua Residence">
 <meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400&display=swap" rel="stylesheet">
 <style>
   :root {
-    --sand: #f6f1e8;
-    --ink: #1b1a17;
-    --muted: #6b6559;
-    --line: #e2d9c9;
-    --sea: #1f6b70;
-    --radius: 18px;
+    --ink: #333;
+    --soft: #8b8b8b;
+    --rule: #e6e4e0;
+    --serif: "Playfair Display", Georgia, serif;
   }
   * { box-sizing: border-box; }
   body {
-    margin: 0;
-    background: var(--sand);
-    color: var(--ink);
-    font: 16px/1.55 ui-sans-serif, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    margin: 0; background: #fff; color: var(--ink);
+    font: 16px/1.7 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
   }
   img { display: block; width: 100%; height: 100%; object-fit: cover; }
   a { color: inherit; }
-  .wrap { max-width: 980px; margin: 0 auto; padding: 0 20px; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 28px; }
+  .label { font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--soft); }
 
-  /* Hero */
-  header { position: relative; min-height: 78svh; display: grid; align-items: end; }
-  header .bg { position: absolute; inset: 0; z-index: 0; }
-  header .bg::after {
-    content: ""; position: absolute; inset: 0;
-    background: linear-gradient(180deg, rgb(0 0 0 / .15) 0%, rgb(0 0 0 / .05) 40%, rgb(12 10 8 / .78) 100%);
+  .masthead { padding: 26px 28px; text-align: center; }
+  .masthead .name { font-family: var(--serif); font-weight: 300; font-size: 26px; letter-spacing: .06em; }
+  .masthead .place { margin-top: 2px; }
+
+  .hero { position: relative; height: 66svh; min-height: 420px; display: grid; place-items: center; text-align: center; }
+  .hero .bg { position: absolute; inset: 0; }
+  .hero .bg::after { content: ""; position: absolute; inset: 0; background: rgb(0 0 0 / .22); }
+  .hero .on { position: relative; color: #fff; padding: 0 24px; }
+  .hero h1 { font-family: var(--serif); font-weight: 300; font-size: clamp(2.2rem, 1.2rem + 3.6vw, 3.6rem); margin: 0 0 10px; line-height: 1.15; }
+  .hero .label { color: rgb(255 255 255 / .92); }
+
+  section { padding: clamp(56px, 4vw + 40px, 96px) 0; }
+  .intro { display: grid; gap: 30px; }
+  @media (min-width: 900px) { .intro { grid-template-columns: 1fr 1.25fr; gap: 64px; } }
+  .intro h2 { font-family: var(--serif); font-weight: 300; font-size: clamp(2rem, 1.4rem + 2vw, 3rem); line-height: 1.12; margin: 0; }
+  .intro p { margin: 0; color: #4a4a4a; max-width: 58ch; text-wrap: pretty; }
+
+  .units { display: grid; gap: 48px; }
+  @media (min-width: 860px) { .units { grid-template-columns: repeat(3, 1fr); gap: 36px; } }
+  .unit { text-align: center; }
+  .unit .shot { aspect-ratio: 4 / 5; overflow: hidden; }
+  .unit h3 { font-family: var(--serif); font-weight: 400; font-size: 1.6rem; margin: 22px 0 6px; }
+  .unit .facts { color: var(--soft); font-size: .92rem; }
+  .unit p { color: #4a4a4a; font-size: .95rem; margin: 12px auto 18px; max-width: 34ch; text-wrap: pretty; }
+  .res {
+    display: inline-block; text-decoration: none; font-size: 12px; letter-spacing: .18em;
+    text-transform: uppercase; border-bottom: 1px solid var(--soft); padding-bottom: 5px;
+    transition: border-color .2s, color .2s;
   }
-  header .inner { position: relative; z-index: 1; color: #fff; padding: 0 20px 44px; max-width: 980px; margin: 0 auto; width: 100%; }
-  .eyebrow { text-transform: uppercase; letter-spacing: .18em; font-size: 12px; opacity: .9; }
-  h1 { font-size: clamp(3rem, 1.5rem + 9vw, 6rem); line-height: .95; margin: 10px 0 6px; font-weight: 500; letter-spacing: -.02em; }
-  .sub { font-size: clamp(1rem, .9rem + .6vw, 1.25rem); max-width: 34ch; text-wrap: pretty; opacity: .95; }
+  .res:hover { color: #000; border-color: #000; }
+  .res span { margin-left: 6px; }
 
-  /* Intro */
-  .intro { padding: 40px 0 8px; }
-  .intro p { font-size: clamp(1.05rem, 1rem + .5vw, 1.3rem); max-width: 52ch; text-wrap: pretty; margin: 0; }
+  .rule { border: 0; border-top: 1px solid var(--rule); margin: 0; }
+  .cols { display: grid; gap: 34px; }
+  @media (min-width: 760px) { .cols { grid-template-columns: repeat(3, 1fr); gap: 48px; } }
+  .cols h4 { font-family: var(--serif); font-weight: 400; font-size: 1.15rem; margin: 0 0 8px; }
+  .cols ul { list-style: none; margin: 0; padding: 0; color: #4a4a4a; font-size: .95rem; }
 
-  /* Units */
-  .units { display: grid; gap: 28px; padding: 28px 0 8px; }
-  @media (min-width: 760px) { .units { grid-template-columns: repeat(3, 1fr); gap: 22px; } }
-  .unit { background: #fff; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); display: flex; flex-direction: column; }
-  .unit .shot { aspect-ratio: 4 / 3; }
-  .unit .body { padding: 18px 18px 20px; display: flex; flex-direction: column; flex: 1; }
-  .unit h2 { margin: 0; font-size: 1.45rem; font-weight: 600; letter-spacing: -.01em; }
-  .facts { color: var(--muted); font-size: .95rem; margin: 4px 0 10px; }
-  .unit p { margin: 0 0 16px; color: #2e2b26; font-size: .97rem; text-wrap: pretty; }
-  .rating { font-size: .9rem; color: var(--muted); margin-bottom: 14px; }
-  .btn {
-    margin-top: auto; display: block; text-align: center; text-decoration: none;
-    background: var(--sea); color: #fff; font-weight: 600; padding: 14px 18px; border-radius: 12px;
-    transition: transform .18s cubic-bezier(.23,1,.32,1), background .18s;
-  }
-  .btn:hover { background: #17585c; }
-  .btn:active { transform: scale(.985); }
+  .gallery { display: grid; grid-auto-flow: column; grid-auto-columns: 78%; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; }
+  @media (min-width: 860px) { .gallery { grid-auto-columns: 40%; } }
+  .gallery figure { margin: 0; aspect-ratio: 3 / 2; overflow: hidden; scroll-snap-align: start; }
 
-  /* Amenities + gallery */
-  .strip { padding: 34px 0 10px; }
-  .strip h3 { font-size: 1rem; text-transform: uppercase; letter-spacing: .14em; color: var(--muted); font-weight: 600; margin: 0 0 14px; }
-  .amen { display: flex; flex-wrap: wrap; gap: 10px; padding: 0; margin: 0; list-style: none; }
-  .amen li { border: 1px solid var(--line); background: #fff; border-radius: 999px; padding: 8px 14px; font-size: .92rem; }
-  .gallery { display: grid; grid-auto-flow: column; grid-auto-columns: 74%; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 8px; }
-  @media (min-width: 760px) { .gallery { grid-auto-columns: 32%; } }
-  .gallery figure { margin: 0; aspect-ratio: 3 / 2; border-radius: 14px; overflow: hidden; scroll-snap-align: start; border: 1px solid var(--line); }
-
-  footer { padding: 42px 0 56px; color: var(--muted); font-size: .92rem; }
-  footer strong { color: var(--ink); }
+  footer { border-top: 1px solid var(--rule); padding: 44px 0 64px; text-align: center; color: var(--soft); font-size: .9rem; }
+  footer .name { font-family: var(--serif); font-size: 1.3rem; color: var(--ink); font-weight: 300; letter-spacing: .06em; }
+  footer a { color: var(--ink); }
 </style>
 </head>
 <body>
 
-<header>
-  <div class="bg"><img src="img/aqua-sunrise.jpg" alt="Aqua at sunrise: the white bungalows above the pool, with the bay of Zihuatanejo behind"></div>
-  <div class="inner">
-    <div class="eyebrow">La Madera Beach · Zihuatanejo, Mexico</div>
-    <h1>Aqua</h1>
-    <p class="sub">Three private beachfront bungalows, steps from the sand and the boardwalk to the pier.</p>
+<div class="masthead">
+  <div class="name">AQUA</div>
+  <div class="label place">Residence · Zihuatanejo</div>
+</div>
+
+<div class="hero">
+  <div class="bg"><img src="img/aqua-sunrise.jpg" alt="Aqua Residence at sunrise above the bay of Zihuatanejo"></div>
+  <div class="on">
+    <h1>Beachfront on La Madera</h1>
+    <div class="label">Three private bungalows</div>
   </div>
-</header>
+</div>
 
-<main class="wrap">
-  <section class="intro">
-    <p>Aqua sits directly on La Madera Beach, in a neighborhood full of restaurants, with the boardwalk to the pier a short walk away and water taxis to Las Gatas Beach from the dock. Each bungalow is completely private, with its own entrance, air conditioning, and an ocean view.</p>
+<main>
+  <section class="wrap intro">
+    <h2>A house on the sand, in the middle of everything.</h2>
+    <p>Aqua sits directly on La Madera Beach, in a neighbourhood full of restaurants, with the boardwalk to the pier a short walk away and water taxis to Las Gatas Beach from the dock. Each of the three bungalows is completely private, with its own entrance, air conditioning and a view of the water.</p>
   </section>
 
-  <section class="units">
-    <article class="unit">
-      <div class="shot"><img src="img/brisas-2.jpg" alt="Brisas terrace looking out over the water"></div>
-      <div class="body">
-        <h2>Brisas</h2>
-        <div class="facts">2 bedrooms · 1 bath · sleeps 4</div>
-        <p>Oceanfront, with a queen bed, A/C, and a ceiling fan in each bedroom.</p>
-        <div class="rating">★ 5.0 · 2 reviews</div>
-        <a class="btn" href="https://www.airbnb.com/rooms/1482157264577134834">Book Brisas on Airbnb</a>
-      </div>
-    </article>
+  <hr class="rule">
 
-    <article class="unit">
-      <div class="shot"><img src="img/oasis-2.jpg" alt="Oasis living area with a hammock and sea view"></div>
-      <div class="body">
-        <h2>Oasis</h2>
+  <section class="wrap">
+    <div class="units">
+      <article class="unit">
+        <div class="shot"><img src="img/brisas-2.jpg" alt="Brisas terrace looking out over the water"></div>
+        <h3>Brisas</h3>
+        <div class="facts">2 bedrooms · 1 bath · sleeps 4</div>
+        <p>Oceanfront, a queen bed, air conditioning and a ceiling fan in each bedroom.</p>
+        <a class="res" href="https://www.airbnb.com/rooms/1482157264577134834">Reservations <span>&rsaquo;</span></a>
+      </article>
+
+      <article class="unit">
+        <div class="shot"><img src="img/oasis-2.jpg" alt="Oasis living area with a hammock and sea view"></div>
+        <h3>Oasis</h3>
         <div class="facts">2 bedrooms · 2 baths · sleeps 4</div>
-        <p>The largest of the three. King bed, a queen with its own bathroom, and a large private patio on the first floor.</p>
-        <div class="rating">★ 5.0 · 4 reviews</div>
-        <a class="btn" href="https://www.airbnb.com/rooms/1482174106685324417">Book Oasis on Airbnb</a>
-      </div>
-    </article>
+        <p>The largest of the three. A king bed, a queen with its own bathroom, and a large private patio.</p>
+        <a class="res" href="https://www.airbnb.com/rooms/1482174106685324417">Reservations <span>&rsaquo;</span></a>
+      </article>
 
-    <article class="unit">
-      <div class="shot"><img src="img/olas-0.jpg" alt="Olas dining terrace with an ocean view"></div>
-      <div class="body">
-        <h2>Olas</h2>
+      <article class="unit">
+        <div class="shot"><img src="img/olas-0.jpg" alt="Olas dining terrace with an ocean view"></div>
+        <h3>Olas</h3>
         <div class="facts">2 bedrooms · 1 bath · sleeps 4</div>
-        <p>Oceanfront, with a queen bed, A/C, and a ceiling fan in each bedroom.</p>
-        <div class="rating">★ 4.63 · 8 reviews</div>
-        <a class="btn" href="https://www.airbnb.com/rooms/1379307056800954871">Book Olas on Airbnb</a>
-      </div>
-    </article>
-  </section>
-
-  <section class="strip">
-    <h3>In every bungalow</h3>
-    <ul class="amen">
-      <li>Beach access</li><li>Ocean view</li><li>Air conditioning</li><li>Kitchen</li><li>Wifi</li><li>Washer</li><li>TV</li><li>Private entrance</li>
-    </ul>
-  </section>
-
-  <section class="strip">
-    <h3>The property</h3>
-    <div class="gallery">
-      <figure><img src="img/aqua-front.jpg" alt="Aqua Residence from the beach, above the sand at La Madera"></figure>
-      <figure><img src="img/aqua-terrace.jpg" alt="The terrace, steps above the water"></figure>
-      <figure><img src="img/oasis-0.jpg" alt="Bedroom opening onto the water"></figure>
-      <figure><img src="img/olas-2.jpg" alt="The beach below the bungalows"></figure>
-      <figure><img src="img/brisas-0.jpg" alt="Dining table set with the ocean behind"></figure>
-      <figure><img src="img/oasis-1.jpg" alt="Open living space at Oasis"></figure>
-      <figure><img src="img/olas-4.jpg" alt="Seating area at Olas"></figure>
+        <p>Oceanfront, a queen bed, air conditioning and a ceiling fan in each bedroom.</p>
+        <a class="res" href="https://www.airbnb.com/rooms/1379307056800954871">Reservations <span>&rsaquo;</span></a>
+      </article>
     </div>
   </section>
 
-  <footer class="wrap" style="padding-left:0;padding-right:0">
-    <strong>Aqua</strong> · La Madera Beach, Zihuatanejo, Guerrero, Mexico<br>
-    Questions about dates or the property? <a href="mailto:REPLACE@EMAIL.com">Send a message</a>.
-  </footer>
+  <hr class="rule">
+
+  <section class="wrap">
+    <div class="cols">
+      <div>
+        <h4>In every bungalow</h4>
+        <ul>
+          <li>Ocean view and beach access</li>
+          <li>Air conditioning and ceiling fans</li>
+          <li>Kitchen, washer, wifi, TV</li>
+          <li>Private entrance</li>
+        </ul>
+      </div>
+      <div>
+        <h4>The neighbourhood</h4>
+        <ul>
+          <li>Restaurants along La Madera</li>
+          <li>Boardwalk to the pier</li>
+          <li>Water taxi to Las Gatas Beach</li>
+          <li>Fishing trips from the dock</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Coming to Zihua</h4>
+        <ul>
+          <li>Places to rent</li>
+          <li>Boats</li>
+          <li>Restaurants</li>
+          <li>Beach clubs</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="label" style="margin-bottom:18px">The property</div>
+    <div class="gallery">
+      <figure><img src="img/aqua-front.jpg" alt="Aqua Residence above the sand at La Madera Beach"></figure>
+      <figure><img src="img/aqua-terrace.jpg" alt="The terrace, steps above the water"></figure>
+      <figure><img src="img/oasis-0.jpg" alt="Bedroom opening onto the water"></figure>
+      <figure><img src="img/brisas-0.jpg" alt="Dining table set with the ocean behind"></figure>
+      <figure><img src="img/olas-2.jpg" alt="The beach below the bungalows"></figure>
+      <figure><img src="img/oasis-1.jpg" alt="Open living space at Oasis"></figure>
+    </div>
+  </section>
 </main>
+
+<footer>
+  <div class="name">AQUA</div>
+  <div class="label" style="margin:6px 0 14px">La Madera Beach · Zihuatanejo, Guerrero</div>
+  <div>aqua.mx · <a href="mailto:REPLACE@EMAIL.com">Enquiries</a></div>
+</footer>
 
 </body>
 </html>
