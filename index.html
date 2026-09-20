@@ -16,221 +16,256 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ink: #333;
-    --soft: #8b8b8b;
-    --rule: #e6e4e0;
-    --serif: "Playfair Display", Georgia, serif;
+    --bone: #f7f5f1;
+    --ink: #1c1b19;
+    --soft: #8a8479;
+    --line: #ddd8cf;
+    --gold: #a08c6a;
+    --display: "Cormorant Garamond", Georgia, serif;
+    --sans: "Jost", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    --ease: cubic-bezier(.22,1,.36,1);
   }
   * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
   body {
-    margin: 0; background: #fff; color: var(--ink);
-    font: 16px/1.7 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    margin: 0; background: var(--bone); color: var(--ink);
+    font-family: var(--sans); font-weight: 300; font-size: 16px; line-height: 1.75;
     -webkit-font-smoothing: antialiased;
   }
   img { display: block; width: 100%; height: 100%; object-fit: cover; }
-  a { color: inherit; }
-  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 28px; }
-  .label { font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--soft); }
+  a { color: inherit; text-decoration: none; }
+  .wrap { width: min(1240px, 100% - 10vw); margin-inline: auto; }
+  .eyebrow { font-size: 10px; letter-spacing: .34em; text-transform: uppercase; color: var(--soft); font-weight: 400; }
+  .display { font-family: var(--display); font-weight: 300; line-height: 1.06; letter-spacing: -.005em; }
 
-  .masthead { padding: 26px 28px; text-align: center; }
-  .masthead .name { font-family: var(--serif); font-weight: 300; font-size: 26px; letter-spacing: .06em; }
-  .masthead .place { margin-top: 2px; }
-
-  .hero { position: relative; height: 66svh; min-height: 420px; display: grid; place-items: center; text-align: center; }
-  .hero .bg { position: absolute; inset: 0; }
-  .hero .bg::after { content: ""; position: absolute; inset: 0; background: rgb(0 0 0 / .22); }
-  .hero .on { position: relative; color: #fff; padding: 0 24px; }
-  .hero h1 { font-family: var(--serif); font-weight: 300; font-size: clamp(2.2rem, 1.2rem + 3.6vw, 3.6rem); margin: 0 0 10px; line-height: 1.15; }
-  .hero .label { color: rgb(255 255 255 / .92); }
-
-  section { padding: clamp(56px, 4vw + 40px, 96px) 0; }
-  .intro { display: grid; gap: 30px; }
-  @media (min-width: 900px) { .intro { grid-template-columns: 1fr 1.25fr; gap: 64px; } }
-  .intro h2 { font-family: var(--serif); font-weight: 300; font-size: clamp(2rem, 1.4rem + 2vw, 3rem); line-height: 1.12; margin: 0; }
-  .intro p { margin: 0; color: #4a4a4a; max-width: 58ch; text-wrap: pretty; }
-
-  .units { display: grid; gap: 48px; }
-  @media (min-width: 860px) { .units { grid-template-columns: repeat(3, 1fr); gap: 36px; } }
-  .unit { text-align: center; }
-  .unit .shot { aspect-ratio: 4 / 5; overflow: hidden; }
-  .unit h3 { font-family: var(--serif); font-weight: 400; font-size: 1.6rem; margin: 22px 0 6px; }
-  .unit .facts { color: var(--soft); font-size: .92rem; }
-  .unit p { color: #4a4a4a; font-size: .95rem; margin: 12px auto 18px; max-width: 34ch; text-wrap: pretty; }
-  .res {
-    display: inline-block; text-decoration: none; font-size: 12px; letter-spacing: .18em;
-    text-transform: uppercase; border-bottom: 1px solid var(--soft); padding-bottom: 5px;
-    transition: border-color .2s, color .2s;
+  /* Top bar */
+  .bar {
+    position: fixed; inset: 0 0 auto; z-index: 30; display: flex; align-items: center;
+    justify-content: space-between; padding: 22px clamp(20px, 5vw, 60px); color: #fff;
+    transition: background .5s var(--ease), color .5s var(--ease), padding .5s var(--ease);
   }
-  .res:hover { color: #000; border-color: #000; }
-  .res span { margin-left: 6px; }
+  .bar.solid { background: rgb(247 245 241 / .96); color: var(--ink); padding-block: 14px; border-bottom: 1px solid var(--line); backdrop-filter: blur(6px); }
+  .bar .mark { font-family: var(--display); font-size: 21px; letter-spacing: .42em; padding-left: .42em; }
+  .bar .cta { font-size: 10px; letter-spacing: .28em; text-transform: uppercase; border-bottom: 1px solid currentColor; padding-bottom: 4px; }
 
-  .rule { border: 0; border-top: 1px solid var(--rule); margin: 0; }
-  .cols { display: grid; gap: 34px; }
-  @media (min-width: 760px) { .cols { grid-template-columns: repeat(3, 1fr); gap: 48px; } }
-  .cols h4 { font-family: var(--serif); font-weight: 400; font-size: 1.15rem; margin: 0 0 8px; }
-  .cols ul { list-style: none; margin: 0; padding: 0; color: #4a4a4a; font-size: .95rem; }
+  /* Hero */
+  .hero { position: relative; height: 100svh; min-height: 560px; overflow: hidden; display: grid; place-items: center; text-align: center; color: #fff; }
+  .hero .shot { position: absolute; inset: 0; animation: drift 26s var(--ease) infinite alternate; }
+  .hero .shot::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgb(12 11 10 / .34), rgb(12 11 10 / .14) 42%, rgb(12 11 10 / .6)); }
+  @keyframes drift { from { transform: scale(1.02); } to { transform: scale(1.14); } }
+  @media (prefers-reduced-motion: reduce) { .hero .shot { animation: none; } }
+  .hero .inner { position: relative; padding: 0 24px; }
+  .hero h1 { margin: 0; font-size: clamp(3.6rem, 1.5rem + 11vw, 10rem); letter-spacing: .04em; }
+  .hero .under { margin-top: 18px; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+  .hero .eyebrow { color: rgb(255 255 255 / .84); }
+  .rule-sm { width: 52px; height: 1px; background: rgb(255 255 255 / .5); }
+  .scroll { position: absolute; bottom: 30px; left: 50%; translate: -50% 0; font-size: 9px; letter-spacing: .3em; text-transform: uppercase; color: rgb(255 255 255 / .75); }
+  .scroll::after { content: ""; display: block; width: 1px; height: 34px; margin: 10px auto 0; background: linear-gradient(rgb(255 255 255 / .8), transparent); }
 
-  .gallery { display: grid; grid-auto-flow: column; grid-auto-columns: 78%; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; }
-  @media (min-width: 860px) { .gallery { grid-auto-columns: 40%; } }
-  .gallery figure { margin: 0; aspect-ratio: 3 / 2; overflow: hidden; scroll-snap-align: start; }
+  /* Reveal */
+  .rise { opacity: 0; transform: translateY(26px); transition: opacity 1.1s var(--ease), transform 1.1s var(--ease); }
+  .rise.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .rise { opacity: 1; transform: none; } }
 
-  footer { border-top: 1px solid var(--rule); padding: 44px 0 64px; text-align: center; color: var(--soft); font-size: .9rem; }
-  footer .name { font-family: var(--serif); font-size: 1.3rem; color: var(--ink); font-weight: 300; letter-spacing: .06em; }
-  footer a { color: var(--ink); }
+  /* Statement */
+  .statement { padding: clamp(90px, 13vh, 170px) 0; text-align: center; }
+  .statement h2 { margin: 26px auto 0; font-size: clamp(2.1rem, 1rem + 4vw, 4.2rem); max-width: 19ch; }
+  .statement p { margin: 30px auto 0; max-width: 60ch; color: #4b4740; }
 
-  /* WhatsApp chat, floating (client asked for a chat like the Cotton site) */
+  /* Bungalow chapters */
+  .chapter { display: grid; gap: clamp(28px, 5vw, 70px); align-items: center; padding: clamp(40px, 7vh, 90px) 0; }
+  @media (min-width: 900px) {
+    .chapter { grid-template-columns: 1.08fr .92fr; }
+    .chapter.flip .media { order: 2; }
+  }
+  .chapter .media { aspect-ratio: 5 / 6; overflow: hidden; }
+  .chapter .media img { transition: transform 1.4s var(--ease); }
+  .chapter:hover .media img { transform: scale(1.035); }
+  .chapter .no { font-family: var(--display); font-size: 13px; letter-spacing: .3em; color: var(--gold); }
+  .chapter h3 { margin: 12px 0 0; font-size: clamp(2.4rem, 1.4rem + 3.2vw, 4rem); }
+  .chapter .spec { display: flex; flex-wrap: wrap; gap: 10px 26px; margin: 22px 0 0; padding: 18px 0 0; border-top: 1px solid var(--line); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--soft); }
+  .chapter p { margin: 22px 0 0; color: #4b4740; max-width: 46ch; }
+  .link { display: inline-block; margin-top: 30px; font-size: 10px; letter-spacing: .3em; text-transform: uppercase; border-bottom: 1px solid var(--gold); padding-bottom: 6px; transition: color .4s var(--ease), border-color .4s var(--ease), letter-spacing .4s var(--ease); }
+  .link:hover { color: var(--gold); letter-spacing: .34em; }
+
+  /* Full-bleed break */
+  .bleed { position: relative; height: clamp(360px, 62svh, 640px); overflow: hidden; display: grid; place-items: center; text-align: center; color: #fff; margin: clamp(30px, 6vh, 80px) 0; }
+  .bleed .shot { position: absolute; inset: 0; }
+  .bleed .shot::after { content: ""; position: absolute; inset: 0; background: rgb(12 11 10 / .34); }
+  .bleed q { position: relative; font-family: var(--display); font-style: italic; font-weight: 300; font-size: clamp(1.6rem, 1rem + 2.6vw, 3rem); max-width: 22ch; quotes: none; padding: 0 24px; }
+
+  /* Details */
+  .details { display: grid; gap: 44px; padding: clamp(60px, 9vh, 120px) 0; }
+  @media (min-width: 820px) { .details { grid-template-columns: repeat(3, 1fr); gap: 60px; } }
+  .details h4 { font-family: var(--display); font-size: 1.6rem; font-weight: 300; margin: 0 0 16px; }
+  .details ul { list-style: none; margin: 0; padding: 0; }
+  .details li { padding: 9px 0; border-bottom: 1px solid var(--line); color: #4b4740; font-size: .95rem; }
+  .details li:last-child { border-bottom: 0; }
+
+  /* Gallery */
+  .gallery-head { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; }
+  .gallery { display: grid; grid-auto-flow: column; grid-auto-columns: min(78vw, 560px); gap: 18px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 28px 0 10px; scrollbar-width: none; }
+  .gallery::-webkit-scrollbar { display: none; }
+  .gallery figure { margin: 0; aspect-ratio: 4 / 3; overflow: hidden; scroll-snap-align: center; }
+
+  /* Footer */
+  footer { padding: clamp(70px, 10vh, 130px) 0 60px; text-align: center; border-top: 1px solid var(--line); margin-top: clamp(40px, 8vh, 90px); }
+  footer .mark { font-family: var(--display); font-size: 30px; letter-spacing: .42em; padding-left: .42em; }
+  footer .rows { margin-top: 26px; display: grid; gap: 8px; color: var(--soft); font-size: .92rem; }
+  footer a { border-bottom: 1px solid var(--line); padding-bottom: 2px; }
+
+  /* Chat launcher */
   .chat {
-    position: fixed; right: 18px; bottom: 18px; z-index: 40;
-    display: inline-flex; align-items: center; gap: 9px;
-    background: #25d366; color: #fff; text-decoration: none;
-    padding: 13px 18px; border-radius: 999px; font-size: 14px; font-weight: 600;
-    box-shadow: 0 10px 28px -12px rgb(0 0 0 / .5);
-    transition: transform .2s ease;
+    position: fixed; right: clamp(16px, 3vw, 34px); bottom: clamp(16px, 3vw, 34px); z-index: 40;
+    display: inline-flex; align-items: center; gap: 10px; background: var(--ink); color: var(--bone);
+    padding: 15px 22px; border-radius: 2px; font-size: 10px; letter-spacing: .28em; text-transform: uppercase;
+    box-shadow: 0 18px 40px -22px rgb(0 0 0 / .8); transition: background .4s var(--ease), letter-spacing .4s var(--ease);
   }
-  .chat:hover { transform: translateY(-2px); }
-  .chat svg { width: 20px; height: 20px; fill: currentColor; }
-  @media (max-width: 500px) { .chat span { display: none; } .chat { padding: 15px; } }
-
-  /* Chat panel */
-  .chatbox {
-    position: fixed; right: 18px; bottom: 84px; z-index: 50; width: min(370px, calc(100vw - 36px));
-    background: #fff; border: 1px solid var(--rule); border-radius: 14px; overflow: hidden;
-    box-shadow: 0 24px 60px -24px rgb(0 0 0 / .35); display: none; flex-direction: column; max-height: min(540px, 76svh);
-  }
-  .chatbox.open { display: flex; }
-  .chatbox-top { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; border-bottom: 1px solid var(--rule); }
-  .chatbox-name { font-family: var(--serif); font-size: 1.15rem; letter-spacing: .04em; }
-  .chatbox-sub { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--soft); }
-  .chatbox-x { border: 0; background: none; font-size: 22px; line-height: 1; color: var(--soft); cursor: pointer; }
-  .chatbox-log { padding: 14px 16px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; flex: 1; }
-  .msg { font-size: .93rem; line-height: 1.55; padding: 10px 13px; border-radius: 12px; max-width: 88%; }
-  .msg.bot { background: #f4f2ee; align-self: flex-start; border-bottom-left-radius: 4px; }
-  .msg.me { background: #333; color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
-  .msg a { color: inherit; }
-  .chatbox-chips { display: flex; flex-wrap: wrap; gap: 7px; padding: 0 16px 10px; }
-  .chip { border: 1px solid var(--rule); background: #fff; border-radius: 999px; padding: 7px 12px; font-size: .82rem; cursor: pointer; color: #4a4a4a; }
-  .chip:hover { border-color: var(--soft); color: #000; }
-  .chatbox-form { display: flex; gap: 8px; padding: 10px 16px; border-top: 1px solid var(--rule); }
-  .chatbox-form input { flex: 1; border: 1px solid var(--rule); border-radius: 10px; padding: 10px 12px; font: inherit; font-size: .92rem; }
-  .chatbox-form input:focus { outline: 2px solid #ddd; outline-offset: 1px; }
-  .chatbox-form button { border: 0; background: #333; color: #fff; border-radius: 10px; padding: 10px 15px; font-size: .85rem; cursor: pointer; }
-  .chatbox-wa { display: block; text-align: center; padding: 11px; font-size: .82rem; color: var(--soft); text-decoration: none; border-top: 1px solid var(--rule); }
-  .chatbox-wa:hover { color: #000; }
+  .chat:hover { background: var(--gold); letter-spacing: .32em; }
+  .chat svg { width: 15px; height: 15px; fill: currentColor; }
 </style>
 </head>
 <body>
 
-<div class="masthead">
-  <div class="name">AQUA</div>
-  <div class="label place">Residence · Zihuatanejo</div>
-</div>
+<header class="bar">
+  <a class="mark" href="#top">AQUA</a>
+  <a class="cta" href="#bungalows">Reservations</a>
+</header>
 
-<div class="hero">
-  <div class="bg"><img src="img/aqua-sunrise.jpg" alt="Aqua Residence at sunrise above the bay of Zihuatanejo"></div>
-  <div class="on">
-    <h1>Beachfront on La Madera</h1>
-    <div class="label">Three private bungalows</div>
+<section class="hero" id="top">
+  <div class="shot"><img src="img/aqua-sunrise.jpg" alt="Aqua Residence at first light above the bay of Zihuatanejo" fetchpriority="high"></div>
+  <div class="inner">
+    <h1 class="display">Aqua</h1>
+    <div class="under">
+      <div class="rule-sm"></div>
+      <div class="eyebrow">La Madera Beach · Zihuatanejo</div>
+    </div>
   </div>
-</div>
+  <div class="scroll">Scroll</div>
+</section>
 
 <main>
-  <section class="wrap intro">
-    <h2>A house on the sand, in the middle of everything.</h2>
-    <p>Aqua sits directly on La Madera Beach, in a neighbourhood full of restaurants, with the boardwalk to the pier a short walk away and water taxis to Las Gatas Beach from the dock. Each of the three bungalows is completely private, with its own entrance, air conditioning and a view of the water.</p>
+  <section class="wrap statement rise">
+    <div class="eyebrow">The residence</div>
+    <h2 class="display">Three private bungalows, on the sand.</h2>
+    <p>Aqua sits directly on La Madera Beach. Restaurants line the shore, the boardwalk to the pier is a short walk, and water taxis leave the dock for Las Gatas. Each bungalow has its own entrance, air conditioning and a view of the water.</p>
   </section>
 
-  <hr class="rule">
+  <div class="wrap" id="bungalows">
+    <article class="chapter rise">
+      <div class="media"><img src="img/oasis-2.jpg" alt="Oasis: open living room with a hammock and the sea beyond" loading="lazy"></div>
+      <div>
+        <div class="no">01</div>
+        <h3 class="display">Oasis</h3>
+        <div class="spec"><span>2 bedrooms</span><span>2 baths</span><span>Sleeps 4</span></div>
+        <p>The largest of the three. A king bed, a second bedroom with a queen and its own bathroom, and a wide private patio on the first floor, steps from the water.</p>
+        <a class="link" href="https://www.airbnb.com/rooms/1482174106685324417" target="_blank" rel="noopener">Reservations</a>
+      </div>
+    </article>
 
-  <section class="wrap">
-    <div class="units">
-      <article class="unit">
-        <div class="shot"><img src="img/brisas-2.jpg" alt="Brisas terrace looking out over the water"></div>
-        <h3>Brisas</h3>
-        <div class="facts">2 bedrooms · 1 bath · sleeps 4</div>
-        <p>Oceanfront, a queen bed, air conditioning and a ceiling fan in each bedroom.</p>
-        <a class="res" href="https://www.airbnb.com/rooms/1482157264577134834">Reservations <span>&rsaquo;</span></a>
-      </article>
+    <article class="chapter flip rise">
+      <div class="media"><img src="img/brisas-2.jpg" alt="Brisas: terrace looking out across the bay" loading="lazy"></div>
+      <div>
+        <div class="no">02</div>
+        <h3 class="display">Brisas</h3>
+        <div class="spec"><span>2 bedrooms</span><span>1 bath</span><span>Sleeps 4</span></div>
+        <p>Oceanfront, with a queen bed, air conditioning and a ceiling fan in each bedroom, and the water directly below the terrace.</p>
+        <a class="link" href="https://www.airbnb.com/rooms/1482157264577134834" target="_blank" rel="noopener">Reservations</a>
+      </div>
+    </article>
 
-      <article class="unit">
-        <div class="shot"><img src="img/oasis-2.jpg" alt="Oasis living area with a hammock and sea view"></div>
-        <h3>Oasis</h3>
-        <div class="facts">2 bedrooms · 2 baths · sleeps 4</div>
-        <p>The largest of the three. A king bed, a queen with its own bathroom, and a large private patio.</p>
-        <a class="res" href="https://www.airbnb.com/rooms/1482174106685324417">Reservations <span>&rsaquo;</span></a>
-      </article>
+    <article class="chapter rise">
+      <div class="media"><img src="img/olas-0.jpg" alt="Olas: dining terrace with an ocean view" loading="lazy"></div>
+      <div>
+        <div class="no">03</div>
+        <h3 class="display">Olas</h3>
+        <div class="spec"><span>2 bedrooms</span><span>1 bath</span><span>Sleeps 4</span></div>
+        <p>Oceanfront, a queen bed in each room, and a dining terrace set above the sand where the beach meets the rocks.</p>
+        <a class="link" href="https://www.airbnb.com/rooms/1379307056800954871" target="_blank" rel="noopener">Reservations</a>
+      </div>
+    </article>
+  </div>
 
-      <article class="unit">
-        <div class="shot"><img src="img/olas-0.jpg" alt="Olas dining terrace with an ocean view"></div>
-        <h3>Olas</h3>
-        <div class="facts">2 bedrooms · 1 bath · sleeps 4</div>
-        <p>Oceanfront, a queen bed, air conditioning and a ceiling fan in each bedroom.</p>
-        <a class="res" href="https://www.airbnb.com/rooms/1379307056800954871">Reservations <span>&rsaquo;</span></a>
-      </article>
+  <section class="bleed">
+    <div class="shot"><img src="img/aqua-terrace.jpg" alt="The terrace at Aqua, a few steps above the water" loading="lazy"></div>
+    <q>A few steps above the water, in the middle of everything.</q>
+  </section>
+
+  <section class="wrap details rise">
+    <div>
+      <h4>In every bungalow</h4>
+      <ul>
+        <li>Ocean view and beach access</li>
+        <li>Air conditioning and ceiling fans</li>
+        <li>Kitchen and washer</li>
+        <li>Wifi and television</li>
+        <li>Private entrance</li>
+      </ul>
+    </div>
+    <div>
+      <h4>The neighbourhood</h4>
+      <ul>
+        <li>Restaurants along La Madera</li>
+        <li>Boardwalk to the pier</li>
+        <li>Water taxi to Las Gatas</li>
+        <li>Fishing from the dock</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Coming to Zihua</h4>
+      <ul>
+        <li>Places to rent</li>
+        <li>Boats</li>
+        <li>Restaurants</li>
+        <li>Beach clubs</li>
+      </ul>
     </div>
   </section>
 
-  <hr class="rule">
-
-  <section class="wrap">
-    <div class="cols">
-      <div>
-        <h4>In every bungalow</h4>
-        <ul>
-          <li>Ocean view and beach access</li>
-          <li>Air conditioning and ceiling fans</li>
-          <li>Kitchen, washer, wifi, TV</li>
-          <li>Private entrance</li>
-        </ul>
-      </div>
-      <div>
-        <h4>The neighbourhood</h4>
-        <ul>
-          <li>Restaurants along La Madera</li>
-          <li>Boardwalk to the pier</li>
-          <li>Water taxi to Las Gatas Beach</li>
-          <li>Fishing trips from the dock</li>
-        </ul>
-      </div>
-      <div>
-        <h4>Coming to Zihua</h4>
-        <ul>
-          <li>Places to rent</li>
-          <li>Boats</li>
-          <li>Restaurants</li>
-          <li>Beach clubs</li>
-        </ul>
-      </div>
+  <section class="wrap rise">
+    <div class="gallery-head">
+      <div class="eyebrow">The property</div>
+      <div class="eyebrow">Zihuatanejo, Guerrero</div>
     </div>
-  </section>
-
-  <section class="wrap">
-    <div class="label" style="margin-bottom:18px">The property</div>
     <div class="gallery">
-      <figure><img src="img/aqua-front.jpg" alt="Aqua Residence above the sand at La Madera Beach"></figure>
-      <figure><img src="img/aqua-terrace.jpg" alt="The terrace, steps above the water"></figure>
-      <figure><img src="img/oasis-0.jpg" alt="Bedroom opening onto the water"></figure>
-      <figure><img src="img/brisas-0.jpg" alt="Dining table set with the ocean behind"></figure>
-      <figure><img src="img/olas-2.jpg" alt="The beach below the bungalows"></figure>
-      <figure><img src="img/oasis-1.jpg" alt="Open living space at Oasis"></figure>
+      <figure><img src="img/aqua-front.jpg" alt="Aqua Residence above the sand at La Madera Beach" loading="lazy"></figure>
+      <figure><img src="img/oasis-0.jpg" alt="A bedroom opening onto the water" loading="lazy"></figure>
+      <figure><img src="img/brisas-0.jpg" alt="A table set with the ocean behind" loading="lazy"></figure>
+      <figure><img src="img/olas-2.jpg" alt="The beach below the bungalows" loading="lazy"></figure>
+      <figure><img src="img/oasis-1.jpg" alt="Open living space at Oasis" loading="lazy"></figure>
+      <figure><img src="img/aqua-front2.jpg" alt="The residence seen from the beach path" loading="lazy"></figure>
     </div>
   </section>
 </main>
 
 <footer>
-  <div class="name">AQUA</div>
-  <div class="label" style="margin:6px 0 14px">La Madera Beach · Zihuatanejo, Guerrero</div>
-  <div>aqua.mx · <a href="mailto:REPLACE@EMAIL.com">Enquiries</a></div>
+  <div class="mark">AQUA</div>
+  <div class="rows">
+    <div class="eyebrow">La Madera Beach · Zihuatanejo, Guerrero, Mexico</div>
+    <div>aqua.mx</div>
+    <div><a href="mailto:REPLACE@EMAIL.com">Enquiries</a></div>
+  </div>
 </footer>
 
-<!-- TODO: replace 5215555555555 with Diego's WhatsApp number (country code, no +, no spaces) -->
-<a class="chat" href="https://wa.me/5215555555555?text=Hola%2C%20I%27d%20like%20to%20ask%20about%20Aqua" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
-  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.5 14.4c-.3-.2-1.7-.9-2-1-.3-.1-.5-.2-.7.2s-.8 1-1 1.2c-.2.2-.4.2-.7 0-.3-.2-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.6 0-.2-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.7s1.2 3.2 1.4 3.4c.2.2 2.400 3.7 5.8 5.2.8.3 1.4.5 1.9.7.8.2 1.5.2 2.1.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.2-.6-.4z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.5 1.3 4.9L2 22l5.3-1.4c1.4.8 3 1.2 4.7 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3.1.8.8-3-.2-.3c-.9-1.4-1.3-3-1.3-4.6 0-4.6 3.8-8.4 8.4-8.4s8.4 3.8 8.4 8.4-3.8 8.5-8.3 8.5z"/></svg>
+<a class="chat" href="#" aria-label="Chat with us">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.5 2 2 6.1 2 11.2c0 2.9 1.5 5.5 3.8 7.2V22l3.5-1.9c.9.2 1.8.3 2.7.3 5.5 0 10-4.1 10-9.2S17.5 2 12 2z"/></svg>
   <span>Chat</span>
 </a>
 
-<script src="chat.js?v=3" defer></script>
+<script>
+  // Reveal on scroll, and a top bar that solidifies once the hero is behind you.
+  const io = new IntersectionObserver((rows) => {
+    rows.forEach((r) => { if (r.isIntersecting) { r.target.classList.add("in"); io.unobserve(r.target); } });
+  }, { rootMargin: "0px 0px -12% 0px" });
+  document.querySelectorAll(".rise").forEach((n) => io.observe(n));
+
+  const bar = document.querySelector(".bar");
+  const hero = document.querySelector(".hero");
+  new IntersectionObserver(([e]) => bar.classList.toggle("solid", !e.isIntersecting), { rootMargin: "-70px 0px 0px 0px" }).observe(hero);
+</script>
+<script src="chat.js?v=4" defer></script>
 </body>
 </html>
