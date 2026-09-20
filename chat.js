@@ -26,7 +26,7 @@
     { k: ["olas"],
       a: `<b>Olas</b> is oceanfront: 2 bedrooms, 1 bath, sleeps 4, a queen bed with A/C and a ceiling fan in each bedroom. ${book("olas")}` },
     { k: ["sleep", "how many people", "capacity", "guests", "big group", "family"],
-      a: `Each bungalow sleeps 4, so all three together sleep 12. For a group, message us on WhatsApp and we can arrange more than one.` },
+      a: `Each bungalow sleeps 4, so all three together sleep 12. For a larger group, all three can be booked together.` },
     { k: ["bed", "king", "queen", "bedroom"],
       a: `Brisas and Olas each have two bedrooms with a queen bed. Oasis has a king in one bedroom and a queen in the other, and the queen room has its own bathroom.` },
     { k: ["bath", "bathroom", "shower"],
@@ -52,20 +52,20 @@
     { k: ["review", "rating", "stars"],
       a: `Brisas is rated 5.0, Oasis 5.0, and Olas 4.63 on Airbnb.` },
     { k: ["dog", "dogs", "pet", "pets", "cat", "animal"],
-      a: `I don't have a pet policy on file. Diego can tell you on WhatsApp, and the Airbnb listing shows the house rules for each bungalow.` },
+      a: `I don't have a pet policy on file. Diego can confirm, and the Airbnb listing shows the house rules for each bungalow.` },
     { k: ["park", "parking", "car", "rental car", "drive"],
-      a: `I don't have parking details on file. Ask Diego on WhatsApp and he can tell you what is available.` },
+      a: `I don't have parking details on file. Diego can tell you what is available.` },
     { k: ["check in", "checkin", "check out", "checkout", "arrival", "arrive", "time"],
-      a: `Check-in and check-out times are on each Airbnb listing, and Diego can confirm anything specific on WhatsApp.` },
+      a: `Check-in and check-out times are on each Airbnb listing, and Diego can confirm anything specific.` },
     { k: ["airport", "zih", "taxi", "transfer", "getting here", "get there"],
-      a: `Zihuatanejo has its own airport (ZIH). For transfers and directions, message Diego on WhatsApp and he will point you the right way.` },
+      a: `Zihuatanejo has its own airport (ZIH). For transfers and directions, Diego can point you the right way.` },
     { k: ["pool", "swim"],
-      a: `There is a pool at the property next door in the photos; for what guests can use, check with Diego on WhatsApp.` },
+      a: `There is a pool at the property next door in the photos; for what guests can use, Diego can confirm.` },
     { k: ["hola", "hello", "hi", "hey", "buenas"],
       a: `Hola. Ask me anything about Aqua: the bungalows, the beach, what is nearby, or how to book.` },
   ];
 
-  const UNKNOWN = `I don't have that one. Diego can answer directly on WhatsApp.`;
+  const UNKNOWN = `I don't have that one on file. Diego answers those personally, and the Airbnb listing for each bungalow has the house rules.`;
   const CHIPS = ["The bungalows", "Where is it?", "What's included?", "How do I book?"];
 
   // Whole-word matching, not substring: "can I bring my dog" was matching the keyword "do" and
@@ -98,7 +98,7 @@
       <input type="text" placeholder="Type a question" aria-label="Type a question" autocomplete="off">
       <button type="submit" aria-label="Send">Send</button>
     </form>
-    <a class="chatbox-wa" href="${WHATSAPP}" target="_blank" rel="noopener">Or message us on WhatsApp</a>`;
+    <a class="chatbox-wa" href="#" data-wa>Diego replies personally</a>`;
   document.body.appendChild(panel);
 
   const log = panel.querySelector(".chatbox-log");
@@ -117,7 +117,6 @@
     const reply = answer(text);
     setTimeout(() => {
       say("bot", reply);
-      if (reply === UNKNOWN) say("bot", `<a href="${WHATSAPP}" target="_blank" rel="noopener">Open WhatsApp</a>`);
     }, 260);
   }
 
@@ -137,13 +136,13 @@
 
   panel.querySelector(".chatbox-x").addEventListener("click", () => panel.classList.remove("open"));
 
-  const launcher = document.querySelector(".chat");
-  if (launcher) {
+  // Both the floating button and the footer "Enquiries" link open the panel.
+  document.querySelectorAll(".chat, .ask").forEach((launcher) => {
     launcher.addEventListener("click", (e) => {
       e.preventDefault();
       panel.classList.add("open");
       if (!log.childElementCount) say("bot", "Hola. Ask me anything about Aqua: the bungalows, the beach, what is nearby, or how to book.");
       input.focus();
     });
-  }
+  });
 })();
