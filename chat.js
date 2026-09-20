@@ -51,6 +51,16 @@
       a: `Rates change by season, so the Airbnb listings have the current price for your dates: ${book("brisas")}, ${book("oasis")}, ${book("olas")}.` },
     { k: ["review", "rating", "stars"],
       a: `Brisas is rated 5.0, Oasis 5.0, and Olas 4.63 on Airbnb.` },
+    { k: ["dog", "dogs", "pet", "pets", "cat", "animal"],
+      a: `I don't have a pet policy on file. Diego can tell you on WhatsApp, and the Airbnb listing shows the house rules for each bungalow.` },
+    { k: ["park", "parking", "car", "rental car", "drive"],
+      a: `I don't have parking details on file. Ask Diego on WhatsApp and he can tell you what is available.` },
+    { k: ["check in", "checkin", "check out", "checkout", "arrival", "arrive", "time"],
+      a: `Check-in and check-out times are on each Airbnb listing, and Diego can confirm anything specific on WhatsApp.` },
+    { k: ["airport", "zih", "taxi", "transfer", "getting here", "get there"],
+      a: `Zihuatanejo has its own airport (ZIH). For transfers and directions, message Diego on WhatsApp and he will point you the right way.` },
+    { k: ["pool", "swim"],
+      a: `There is a pool at the property next door in the photos; for what guests can use, check with Diego on WhatsApp.` },
     { k: ["hola", "hello", "hi", "hey", "buenas"],
       a: `Hola. Ask me anything about Aqua: the bungalows, the beach, what is nearby, or how to book.` },
   ];
@@ -58,11 +68,14 @@
   const UNKNOWN = `I don't have that one. Diego can answer directly on WhatsApp.`;
   const CHIPS = ["The bungalows", "Where is it?", "What's included?", "How do I book?"];
 
+  // Whole-word matching, not substring: "can I bring my dog" was matching the keyword "do" and
+  // answering about restaurants. A wrong confident answer is worse here than "ask Diego".
+  const esc = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   function answer(text) {
-    const q = text.toLowerCase();
+    const q = " " + text.toLowerCase().replace(/[^a-z0-9\s/]/g, " ").replace(/\s+/g, " ") + " ";
     let best = null, bestScore = 0;
     for (const item of KB) {
-      const score = item.k.reduce((s, k) => (q.includes(k) ? s + k.length : s), 0);
+      const score = item.k.reduce((s, k) => (new RegExp("\\b" + esc(k) + "\\b").test(q) ? s + k.length : s), 0);
       if (score > bestScore) { bestScore = score; best = item; }
     }
     return bestScore > 0 ? best.a : UNKNOWN;
