@@ -126,6 +126,38 @@
   }
   .chat:hover { background: var(--gold); letter-spacing: .32em; }
   .chat svg { width: 15px; height: 15px; fill: currentColor; }
+
+  /* Chat panel (chat.js builds the markup) */
+  .chatbox {
+    position: fixed; right: clamp(16px, 3vw, 34px); bottom: calc(clamp(16px, 3vw, 34px) + 66px); z-index: 45;
+    width: min(384px, calc(100vw - 32px)); max-height: min(560px, 74svh);
+    background: var(--bone); border: 1px solid var(--line); display: none; flex-direction: column;
+    box-shadow: 0 30px 70px -30px rgb(28 27 25 / .55);
+  }
+  .chatbox.open { display: flex; }
+  .chatbox-top { display: flex; align-items: center; justify-content: space-between; padding: 18px 20px; border-bottom: 1px solid var(--line); }
+  .chatbox-name { font-family: var(--display); font-size: 1.5rem; font-weight: 300; letter-spacing: .3em; padding-left: .3em; }
+  .chatbox-sub { font-size: 9px; letter-spacing: .3em; text-transform: uppercase; color: var(--soft); }
+  .chatbox-x { border: 0; background: none; font-size: 20px; line-height: 1; color: var(--soft); cursor: pointer; }
+  .chatbox-log { padding: 18px 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; flex: 1; }
+  .msg { font-size: .92rem; line-height: 1.65; padding: 12px 15px; max-width: 88%; }
+  .msg.bot { background: #fff; border: 1px solid var(--line); align-self: flex-start; }
+  .msg.me { background: var(--ink); color: var(--bone); align-self: flex-end; }
+  .msg a { border-bottom: 1px solid currentColor; }
+  .chatbox-chips { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 20px 14px; }
+  .chip {
+    border: 1px solid var(--line); background: transparent; padding: 8px 13px; cursor: pointer;
+    font-family: var(--sans); font-size: 9px; letter-spacing: .2em; text-transform: uppercase; color: var(--soft);
+    transition: border-color .3s var(--ease), color .3s var(--ease);
+  }
+  .chip:hover { border-color: var(--gold); color: var(--ink); }
+  .chatbox-form { display: flex; gap: 10px; padding: 14px 20px; border-top: 1px solid var(--line); }
+  .chatbox-form input { flex: 1; border: 1px solid var(--line); background: #fff; padding: 11px 13px; font-family: var(--sans); font-weight: 300; font-size: .92rem; }
+  .chatbox-form input:focus { outline: 1px solid var(--gold); outline-offset: 1px; }
+  .chatbox-form button { border: 0; background: var(--ink); color: var(--bone); padding: 11px 18px; font-family: var(--sans); font-size: 9px; letter-spacing: .24em; text-transform: uppercase; cursor: pointer; }
+  .chatbox-form button:hover { background: var(--gold); }
+  .chatbox-wa { display: block; text-align: center; padding: 13px; font-size: 9px; letter-spacing: .24em; text-transform: uppercase; color: var(--soft); border-top: 1px solid var(--line); }
+  .chatbox-wa:hover { color: var(--ink); }
 </style>
 </head>
 <body>
