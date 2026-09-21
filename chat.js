@@ -8,7 +8,15 @@
  * To add an answer: append to KB. `k` is the keywords that trigger it, `a` is the reply (HTML).
  */
 (function () {
-  const WHATSAPP = "https://wa.me/5215555555555?text=Hola%2C%20I%27d%20like%20to%20ask%20about%20Aqua"; // TODO: real number
+  // NUMBER SWITCHED 2026-09-20. Diego changed eSIM, so the Mexican line is not registered on
+  // WhatsApp right now (he confirmed: "+527551044400 isn't on WhatsApp ... might be cause I
+  // changed eSIM, should be good by Wednesday"). This is his US line so the button is not dead
+  // over the weekend on a rental site.
+  // SWITCH BACK once he confirms the Mexican line is live: 5217551044400
+  // (Note: the "+011527551044400" he also sent is NOT a second number. 011 is the US
+  //  international exit code, not part of the number - strip it and you get 527551044400,
+  //  the one that is already failing. Only the US line below can work today.)
+  const WHATSAPP = "https://wa.me/13057661122?text=Hola%2C%20I%27d%20like%20to%20ask%20about%20Aqua";
   const LINKS = {
     brisas: "https://www.airbnb.com/rooms/1482157264577134834",
     oasis: "https://www.airbnb.com/rooms/1482174106685324417",
@@ -52,20 +60,20 @@
     { k: ["review", "rating", "stars"],
       a: `Brisas is rated 5.0, Oasis 5.0, and Olas 4.63 on Airbnb.` },
     { k: ["dog", "dogs", "pet", "pets", "cat", "animal"],
-      a: `I don't have a pet policy on file. Diego can confirm, and the Airbnb listing shows the house rules for each bungalow.` },
+      a: `I don't have a pet policy on file. Diego can confirm on WhatsApp, and the Airbnb listing shows the house rules for each bungalow.` },
     { k: ["park", "parking", "car", "rental car", "drive"],
-      a: `I don't have parking details on file. Diego can tell you what is available.` },
+      a: `I don't have parking details on file. Diego can tell you what is available on WhatsApp.` },
     { k: ["check in", "checkin", "check out", "checkout", "arrival", "arrive", "time"],
-      a: `Check-in and check-out times are on each Airbnb listing, and Diego can confirm anything specific.` },
+      a: `Check-in and check-out times are on each Airbnb listing, and Diego can confirm anything specific on WhatsApp.` },
     { k: ["airport", "zih", "taxi", "transfer", "getting here", "get there"],
-      a: `Zihuatanejo has its own airport (ZIH). For transfers and directions, Diego can point you the right way.` },
+      a: `Zihuatanejo has its own airport (ZIH). For transfers and directions, message Diego on WhatsApp.` },
     { k: ["pool", "swim"],
-      a: `There is a pool at the property next door in the photos; for what guests can use, Diego can confirm.` },
+      a: `There is a pool at the property next door in the photos; for what guests can use, ask Diego on WhatsApp.` },
     { k: ["hola", "hello", "hi", "hey", "buenas"],
       a: `Hola. Ask me anything about Aqua: the bungalows, the beach, what is nearby, or how to book.` },
   ];
 
-  const UNKNOWN = `I don't have that one on file. Diego answers those personally, and the Airbnb listing for each bungalow has the house rules.`;
+  const UNKNOWN = `I don't have that one on file. Diego can answer it directly on WhatsApp, and the Airbnb listing for each bungalow has the house rules.`;
   const CHIPS = ["The bungalows", "Where is it?", "What's included?", "How do I book?"];
 
   // Whole-word matching, not substring: "can I bring my dog" was matching the keyword "do" and
@@ -98,7 +106,7 @@
       <input type="text" placeholder="Type a question" aria-label="Type a question" autocomplete="off">
       <button type="submit" aria-label="Send">Send</button>
     </form>
-    <div class="chatbox-wa">Diego replies personally</div>`;
+    <a class="chatbox-wa" href="${WHATSAPP}" target="_blank" rel="noopener">Message Diego on WhatsApp</a>`;
   document.body.appendChild(panel);
 
   const log = panel.querySelector(".chatbox-log");
@@ -136,8 +144,9 @@
 
   panel.querySelector(".chatbox-x").addEventListener("click", () => panel.classList.remove("open"));
 
-  // Both the floating button and the footer "Enquiries" link open the panel.
-  document.querySelectorAll(".chat, .ask").forEach((launcher) => {
+  // The floating button goes straight to WhatsApp (client's call). The assistant opens from the
+  // footer link only, so the two never compete for the same tap.
+  document.querySelectorAll(".ask").forEach((launcher) => {
     launcher.addEventListener("click", (e) => {
       e.preventDefault();
       panel.classList.add("open");
