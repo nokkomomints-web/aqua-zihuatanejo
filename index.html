@@ -74,10 +74,17 @@
 
   /* Hero */
   .hero { position: relative; height: 100svh; min-height: 560px; overflow: hidden; display: grid; place-items: center; text-align: center; color: #fff; }
-  .hero .shot { position: absolute; inset: 0; animation: drift 26s var(--ease) infinite alternate; }
+  .hero .shot { position: absolute; inset: 0; }
+  .hero .hero-video { width: 100%; height: 100%; object-fit: cover; display: block; }
+  /* The still is the fallback: shown until the video can play, and kept for reduced motion. */
+  .hero .hero-still { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .6s var(--ease); }
+  .hero .shot.no-video .hero-video { display: none; }
+  .hero .shot.no-video .hero-still { opacity: 1; }
+  @media (prefers-reduced-motion: reduce) {
+    .hero .hero-video { display: none; }
+    .hero .hero-still { opacity: 1; }
+  }
   .hero .shot::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgb(12 11 10 / .34), rgb(12 11 10 / .14) 42%, rgb(12 11 10 / .6)); }
-  @keyframes drift { from { transform: scale(1.02); } to { transform: scale(1.14); } }
-  @media (prefers-reduced-motion: reduce) { .hero .shot { animation: none; } }
   .hero .inner { position: relative; padding: 0 24px; }
   .hero h1 { margin: 0; font-size: clamp(3.6rem, 1.5rem + 11vw, 10rem); letter-spacing: .04em; }
   .hero .under { margin-top: 18px; display: flex; flex-direction: column; align-items: center; gap: 14px; }
@@ -196,7 +203,12 @@
 </header>
 
 <section class="hero" id="top">
-  <div class="shot"><img src="img/aqua-sunrise.jpg" alt="Aqua Residence at first light above the bay of Zihuatanejo" fetchpriority="high"></div>
+  <div class="shot">
+    <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="img/aqua-hero-poster.jpg" aria-label="Aerial approach to Aqua Residence from the bay">
+      <source src="img/aqua-hero.mp4" type="video/mp4">
+    </video>
+    <img class="hero-still" src="img/aqua-sunrise.jpg" alt="Aqua Residence at first light above the bay of Zihuatanejo">
+  </div>
   <div class="inner">
     <h1 class="display">Aqua</h1>
     <div class="under">
@@ -320,6 +332,14 @@
     rows.forEach((r) => { if (r.isIntersecting) { r.target.classList.add("in"); io.unobserve(r.target); } });
   }, { rootMargin: "0px 0px -12% 0px" });
   document.querySelectorAll(".rise").forEach((n) => io.observe(n));
+
+  const v = document.querySelector(".hero-video");
+  if (v) {
+    const fallback = () => document.querySelector(".hero .shot")?.classList.add("no-video");
+    v.addEventListener("error", fallback);
+    v.play?.().catch(fallback);
+    setTimeout(() => { if (v.readyState < 2) fallback(); }, 4000);
+  }
 
   const bar = document.querySelector(".bar");
   const hero = document.querySelector(".hero");
