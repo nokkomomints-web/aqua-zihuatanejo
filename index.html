@@ -204,9 +204,9 @@
 
 <section class="hero" id="top">
   <div class="shot">
-    <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="img/aqua-hero-poster.jpg" aria-label="Aerial approach to Aqua Residence from the bay">
-      <source src="img/aqua-hero.mp4" type="video/mp4">
-    </video>
+    <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="img/aqua-hero-poster.jpg"
+      data-hd="img/hero-1080.mp4" data-sd="img/hero-720.mp4"
+      aria-label="Aerial approach to Aqua Residence from the bay"></video>
     <img class="hero-still" src="img/aqua-sunrise.jpg" alt="Aqua Residence at first light above the bay of Zihuatanejo">
   </div>
   <div class="inner">
@@ -333,12 +333,20 @@
   }, { rootMargin: "0px 0px -12% 0px" });
   document.querySelectorAll(".rise").forEach((n) => io.observe(n));
 
+  // Phones get the 720p cut (4.5MB) and desktops the 1080p (9.3MB); a saver-mode or slow
+  // connection gets neither, and the still photo carries the hero instead.
   const v = document.querySelector(".hero-video");
   if (v) {
     const fallback = () => document.querySelector(".hero .shot")?.classList.add("no-video");
-    v.addEventListener("error", fallback);
-    v.play?.().catch(fallback);
-    setTimeout(() => { if (v.readyState < 2) fallback(); }, 4000);
+    const net = navigator.connection || {};
+    if (net.saveData || /2g/.test(net.effectiveType || "")) {
+      fallback();
+    } else {
+      v.src = window.innerWidth >= 900 ? v.dataset.hd : v.dataset.sd;
+      v.addEventListener("error", fallback);
+      v.play?.().catch(fallback);
+      setTimeout(() => { if (v.readyState < 2) fallback(); }, 6000);
+    }
   }
 
   const bar = document.querySelector(".bar");
