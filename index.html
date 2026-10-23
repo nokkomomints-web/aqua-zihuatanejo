@@ -16,10 +16,15 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%232f3830'/%3E%3Ctext x='32' y='45' font-family='Georgia,serif' font-size='40' fill='%23f7f5f1' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E">
 <link rel="apple-touch-icon" href="img/aqua-sunrise.jpg">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+<link rel="preload" as="image" type="image/avif" href="img/hero-poster-p.avif" media="(max-aspect-ratio: 3/4)" fetchpriority="high">
+<link rel="preload" as="image" type="image/avif" imagesrcset="img/hero-poster-1280.avif 1280w, img/hero-poster-1920.avif 1920w" imagesizes="100vw" media="(min-aspect-ratio: 3001/4000)" fetchpriority="high">
 <style>
+  /* Fonts are self-hosted copies of the Google Fonts files (latin + latin-ext), same faces and weights as before. */
+  @font-face { font-family: "Cormorant Garamond"; font-style: normal; font-weight: 300 400; font-display: swap; src: url(fonts/cormorant-latin-ext.woff2) format("woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: "Cormorant Garamond"; font-style: normal; font-weight: 300 400; font-display: swap; src: url(fonts/cormorant-latin.woff2) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: "Jost"; font-style: normal; font-weight: 200 400; font-display: swap; src: url(fonts/jost-latin-ext.woff2) format("woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: "Jost"; font-style: normal; font-weight: 200 400; font-display: swap; src: url(fonts/jost-latin.woff2) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+
   :root {
     --bone: #f7f5f1;
     --ink: #1c1b19;
@@ -39,6 +44,7 @@
     -webkit-font-smoothing: antialiased;
   }
   img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  picture { display: contents; }
   a { color: inherit; text-decoration: none; }
   .wrap { width: min(1240px, 100% - 10vw); margin-inline: auto; }
   .eyebrow { font-size: 10px; letter-spacing: .34em; text-transform: uppercase; color: var(--soft); font-weight: 400; }
@@ -75,7 +81,9 @@
   /* Hero */
   .hero { position: relative; height: 100svh; min-height: 560px; overflow: hidden; display: grid; place-items: center; text-align: center; color: #fff; }
   .hero .shot { position: absolute; inset: 0; }
-  .hero .hero-video { width: 100%; height: 100%; object-fit: cover; display: block; }
+  /* The poster frame paints first (it is the LCP image); the video loads after the page and plays over it. */
+  .hero .hero-poster img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .hero .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
   /* The still is the fallback: shown until the video can play, and kept for reduced motion. */
   .hero .hero-still { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .6s var(--ease); }
   .hero .shot.no-video .hero-video { display: none; }
@@ -204,10 +212,17 @@
 
 <section class="hero" id="top">
   <div class="shot">
-    <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="img/aqua-hero-poster.jpg"
-      data-hd="img/hero-1080.mp4" data-sd="img/hero-720.mp4"
+    <picture class="hero-poster">
+      <source type="image/avif" media="(max-aspect-ratio: 3/4)" srcset="img/hero-poster-p.avif">
+      <source type="image/webp" media="(max-aspect-ratio: 3/4)" srcset="img/hero-poster-p.webp">
+      <source type="image/avif" srcset="img/hero-poster-1280.avif 1280w, img/hero-poster-1920.avif 1920w" sizes="100vw">
+      <source type="image/webp" srcset="img/hero-poster-1280.webp 1280w, img/hero-poster-1920.webp 1920w" sizes="100vw">
+      <img src="img/aqua-hero-poster.jpg" width="1920" height="1080" fetchpriority="high" alt="">
+    </picture>
+    <video class="hero-video" muted loop playsinline preload="none"
+      data-hd="img/hero-1080.mp4" data-sd="img/hero-720.mp4" data-m="img/hero-m.mp4" data-mw="img/hero-m.webm"
       aria-label="Aerial approach to Aqua Residence from the bay"></video>
-    <img class="hero-still" src="img/aqua-sunrise.jpg" alt="Aqua Residence at first light above the bay of Zihuatanejo">
+    <img class="hero-still" data-src="img/aqua-sunrise.jpg" width="1280" height="720" alt="Aqua Residence at first light above the bay of Zihuatanejo">
   </div>
   <div class="inner">
     <h1 class="display">Aqua</h1>
@@ -228,7 +243,7 @@
 
   <div class="wrap" id="bungalows">
     <article class="chapter rise">
-      <div class="media"><img src="img/oasis-2.jpg" alt="Oasis: open living room with a hammock and the sea beyond" loading="lazy"></div>
+      <div class="media"><picture><source type="image/avif" data-srcset="img/oasis-2-960.avif 960w, img/oasis-2-1600.avif 1600w" sizes="(min-width: 900px) 52vw, 90vw"><source type="image/webp" data-srcset="img/oasis-2-960.webp 960w, img/oasis-2-1600.webp 1600w" sizes="(min-width: 900px) 52vw, 90vw"><img data-src="img/oasis-2.jpg" width="1920" height="1280" alt="Oasis: open living room with a hammock and the sea beyond" loading="lazy" decoding="async"></picture><noscript><img src="img/oasis-2.jpg" width="1920" height="1280" alt="Oasis: open living room with a hammock and the sea beyond" loading="lazy"></noscript></div>
       <div>
         <div class="no">01</div>
         <h3 class="display">Oasis</h3>
@@ -239,7 +254,7 @@
     </article>
 
     <article class="chapter flip rise">
-      <div class="media"><img src="img/brisas-2.jpg" alt="Brisas: terrace looking out across the bay" loading="lazy"></div>
+      <div class="media"><picture><source type="image/avif" data-srcset="img/brisas-2-960.avif 960w, img/brisas-2-1600.avif 1600w" sizes="(min-width: 900px) 52vw, 90vw"><source type="image/webp" data-srcset="img/brisas-2-960.webp 960w, img/brisas-2-1600.webp 1600w" sizes="(min-width: 900px) 52vw, 90vw"><img data-src="img/brisas-2.jpg" width="1920" height="1280" alt="Brisas: terrace looking out across the bay" loading="lazy" decoding="async"></picture><noscript><img src="img/brisas-2.jpg" width="1920" height="1280" alt="Brisas: terrace looking out across the bay" loading="lazy"></noscript></div>
       <div>
         <div class="no">02</div>
         <h3 class="display">Brisas</h3>
@@ -250,7 +265,7 @@
     </article>
 
     <article class="chapter rise">
-      <div class="media"><img src="img/olas-0.jpg" alt="Olas: dining terrace with an ocean view" loading="lazy"></div>
+      <div class="media"><picture><source type="image/avif" data-srcset="img/olas-0-960.avif 960w, img/olas-0-1600.avif 1600w" sizes="(min-width: 900px) 52vw, 90vw"><source type="image/webp" data-srcset="img/olas-0-960.webp 960w, img/olas-0-1600.webp 1600w" sizes="(min-width: 900px) 52vw, 90vw"><img data-src="img/olas-0.jpg" width="1920" height="1280" alt="Olas: dining terrace with an ocean view" loading="lazy" decoding="async"></picture><noscript><img src="img/olas-0.jpg" width="1920" height="1280" alt="Olas: dining terrace with an ocean view" loading="lazy"></noscript></div>
       <div>
         <div class="no">03</div>
         <h3 class="display">Olas</h3>
@@ -262,7 +277,7 @@
   </div>
 
   <section class="bleed">
-    <div class="shot"><img src="img/aqua-terrace.jpg" alt="The terrace at Aqua, a few steps above the water" loading="lazy"></div>
+    <div class="shot"><picture><source type="image/avif" srcset="img/aqua-terrace.avif"><source type="image/webp" srcset="img/aqua-terrace.webp"><img src="img/aqua-terrace.jpg" width="1280" height="720" alt="The terrace at Aqua, a few steps above the water" loading="lazy" decoding="async"></picture></div>
     <q>A few steps above the water, in the middle of everything.</q>
   </section>
 
@@ -333,26 +348,52 @@
   }, { rootMargin: "0px 0px -12% 0px" });
   document.querySelectorAll(".rise").forEach((n) => io.observe(n));
 
-  // Phones get the 720p cut (4.5MB) and desktops the 1080p (9.3MB); a saver-mode or slow
-  // connection gets neither, and the still photo carries the hero instead.
+  // The poster frame is the first paint. The video starts only after the page has loaded:
+  // portrait phones get a portrait cut of the same footage (1.5MB), other narrow screens the 720p
+  // cut and desktops the 1080p. A saver-mode or slow connection gets no video, and the still
+  // photo carries the hero instead (as does reduced motion).
   const v = document.querySelector(".hero-video");
+  const still = document.querySelector(".hero-still");
+  const showStill = () => { if (still && !still.src) still.src = still.dataset.src; };
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) showStill();
   if (v) {
-    const fallback = () => document.querySelector(".hero .shot")?.classList.add("no-video");
+    const fallback = () => { showStill(); document.querySelector(".hero .shot")?.classList.add("no-video"); };
     const net = navigator.connection || {};
     if (net.saveData || /2g/.test(net.effectiveType || "")) {
       fallback();
     } else {
-      v.src = window.innerWidth >= 900 ? v.dataset.hd : v.dataset.sd;
-      v.addEventListener("error", fallback);
-      v.play?.().catch(fallback);
-      setTimeout(() => { if (v.readyState < 2) fallback(); }, 6000);
+      const start = () => {
+        if (window.innerWidth >= 900) v.src = v.dataset.hd;
+        else if (matchMedia("(max-aspect-ratio: 3/4)").matches) {
+          v.src = v.canPlayType('video/mp4; codecs="avc1.640028"') || !v.canPlayType('video/webm; codecs="vp9"') ? v.dataset.m : v.dataset.mw;
+        } else v.src = v.dataset.sd;
+        v.addEventListener("error", fallback);
+        v.play?.().catch(fallback);
+        setTimeout(() => { if (v.readyState < 2) fallback(); }, 6000);
+      };
+      afterLoad(start);
     }
   }
+
+  // Below-the-fold work waits for the page load: the bungalow photos get their real sources
+  // (they still lazy-load natively), and the guest assistant script is added.
+  function afterLoad(fn) {
+    // Load event, then the next painted frame, then a short beat: the hero is on screen first.
+    const go = () => requestAnimationFrame(() => setTimeout(fn, 250));
+    document.readyState === "complete" ? go() : addEventListener("load", go, { once: true });
+  }
+  afterLoad(() => {
+    document.querySelectorAll("[data-srcset]").forEach((s) => { s.srcset = s.dataset.srcset; s.removeAttribute("data-srcset"); });
+    document.querySelectorAll(".chapter img[data-src]").forEach((i) => { i.src = i.dataset.src; i.removeAttribute("data-src"); });
+    const s = document.createElement("script"); s.src = "chat.js?v=10"; document.body.appendChild(s);
+    // The italic face is only used in the quote further down the page.
+    const f = document.createElement("style"); f.textContent = `@font-face { font-family: "Cormorant Garamond"; font-style: italic; font-weight: 300; font-display: swap; src: url(fonts/cormorant-italic-latin-ext.woff2) format("woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; } @font-face { font-family: "Cormorant Garamond"; font-style: italic; font-weight: 300; font-display: swap; src: url(fonts/cormorant-italic-latin.woff2) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }`; document.head.appendChild(f);
+  });
 
   const bar = document.querySelector(".bar");
   const hero = document.querySelector(".hero");
   new IntersectionObserver(([e]) => bar.classList.toggle("solid", !e.isIntersecting), { rootMargin: "-70px 0px 0px 0px" }).observe(hero);
 </script>
-<script src="chat.js?v=10" defer></script>
+
 </body>
 </html>
