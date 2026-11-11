@@ -276,6 +276,13 @@
   .faq summary:focus-visible { outline: 1px solid var(--gold); outline-offset: 4px; }
   .faq details p { margin: 0; padding: 0 0 20px; max-width: 62ch; color: #4b4740; font-size: .95rem; }
   @media (min-width: 900px) { .faq { display: grid; grid-template-columns: .9fr 1.1fr; gap: 64px; align-items: start; } .faq h2 { margin-bottom: 0; } }
+
+  /* 11/10 Daniel: "the layout of these two buttons could be better" -> one balanced pair: same size, side by side, primary filled + secondary outlined. */
+  .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; align-items: stretch; margin-top: 28px; max-width: 460px; }
+  .actions .direct-btn, .actions .link { display: flex; align-items: center; justify-content: center; min-height: 50px; margin: 0; padding: 0 12px; box-sizing: border-box; font-family: var(--sans); font-size: 10px; letter-spacing: .22em; text-transform: uppercase; text-align: center; line-height: 1.3; }
+  .actions .link { border: 1px solid var(--ink); color: var(--ink); background: transparent; }
+  .actions .link:hover, .actions .link:focus-visible { background: var(--ink); color: var(--bone); letter-spacing: .22em; }
+  @media (max-width: 340px) { .actions { grid-template-columns: 1fr; } }
 </style>
 <script type="application/ld+json">
 {
@@ -398,8 +405,8 @@
         <div class="spec"><span>2 bedrooms</span><span>2 baths</span><span>Sleeps 4</span></div>
         <p>The largest of the three. A king bed, a second bedroom with a queen and its own bathroom, and a wide private patio on the first floor, steps from the water.</p>
         <div class="actions">
-          <button type="button" class="direct-btn" data-book="oasis">Book direct with Diego</button>
-          <a class="link" href="https://www.airbnb.com/rooms/1482174106685324417" target="_blank" rel="noopener" data-unit="oasis">Reserve on Airbnb</a>
+          <button type="button" class="direct-btn" data-book="oasis">Book direct</button>
+          <a class="link" href="https://www.airbnb.com/rooms/1482174106685324417" target="_blank" rel="noopener" data-unit="oasis">View on Airbnb</a>
         </div>
       </div>
     </article>
@@ -412,8 +419,8 @@
         <div class="spec"><span>2 bedrooms</span><span>1 bath</span><span>Sleeps 4</span></div>
         <p>Oceanfront, with a queen bed, air conditioning and a ceiling fan in each bedroom, and the water directly below the terrace.</p>
         <div class="actions">
-          <button type="button" class="direct-btn" data-book="brisas">Book direct with Diego</button>
-          <a class="link" href="https://www.airbnb.com/rooms/1482157264577134834" target="_blank" rel="noopener" data-unit="brisas">Reserve on Airbnb</a>
+          <button type="button" class="direct-btn" data-book="brisas">Book direct</button>
+          <a class="link" href="https://www.airbnb.com/rooms/1482157264577134834" target="_blank" rel="noopener" data-unit="brisas">View on Airbnb</a>
         </div>
       </div>
     </article>
@@ -426,8 +433,8 @@
         <div class="spec"><span>2 bedrooms</span><span>1 bath</span><span>Sleeps 4</span></div>
         <p>Oceanfront, a queen bed in each room, and a dining terrace set above the sand where the beach meets the rocks.</p>
         <div class="actions">
-          <button type="button" class="direct-btn" data-book="olas">Book direct with Diego</button>
-          <a class="link" href="https://www.airbnb.com/rooms/1379307056800954871" target="_blank" rel="noopener" data-unit="olas">Reserve on Airbnb</a>
+          <button type="button" class="direct-btn" data-book="olas">Book direct</button>
+          <a class="link" href="https://www.airbnb.com/rooms/1379307056800954871" target="_blank" rel="noopener" data-unit="olas">View on Airbnb</a>
         </div>
       </div>
     </article>

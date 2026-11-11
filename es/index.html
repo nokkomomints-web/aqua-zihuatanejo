@@ -277,6 +277,13 @@
   .faq summary:focus-visible { outline: 1px solid var(--gold); outline-offset: 4px; }
   .faq details p { margin: 0; padding: 0 0 20px; max-width: 62ch; color: #4b4740; font-size: .95rem; }
   @media (min-width: 900px) { .faq { display: grid; grid-template-columns: .9fr 1.1fr; gap: 64px; align-items: start; } .faq h2 { margin-bottom: 0; } }
+
+  /* 11/10 Daniel: "the layout of these two buttons could be better" -> one balanced pair: same size, side by side, primary filled + secondary outlined. */
+  .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; align-items: stretch; margin-top: 28px; max-width: 460px; }
+  .actions .direct-btn, .actions .link { display: flex; align-items: center; justify-content: center; min-height: 50px; margin: 0; padding: 0 12px; box-sizing: border-box; font-family: var(--sans); font-size: 10px; letter-spacing: .22em; text-transform: uppercase; text-align: center; line-height: 1.3; }
+  .actions .link { border: 1px solid var(--ink); color: var(--ink); background: transparent; }
+  .actions .link:hover, .actions .link:focus-visible { background: var(--ink); color: var(--bone); letter-spacing: .22em; }
+  @media (max-width: 340px) { .actions { grid-template-columns: 1fr; } }
 </style>
 <script type="application/ld+json">
 {
@@ -399,8 +406,8 @@
         <div class="spec"><span>2 recámaras</span><span>2 baños</span><span>Para 4</span></div>
         <p>El más grande de los tres. Una cama king, una segunda recámara con cama queen y baño propio, y un amplio patio privado en el primer piso, a unos pasos del agua.</p>
         <div class="actions">
-          <button type="button" class="direct-btn" data-book="oasis">Reservar directo con Diego</button>
-          <a class="link" href="https://www.airbnb.com/rooms/1482174106685324417" target="_blank" rel="noopener" data-unit="oasis">Reservar en Airbnb</a>
+          <button type="button" class="direct-btn" data-book="oasis">Reservar directo</button>
+          <a class="link" href="https://www.airbnb.com/rooms/1482174106685324417" target="_blank" rel="noopener" data-unit="oasis">Ver en Airbnb</a>
         </div>
       </div>
     </article>
@@ -413,8 +420,8 @@
         <div class="spec"><span>2 recámaras</span><span>1 baño</span><span>Para 4</span></div>
         <p>Frente al mar, con cama queen, aire acondicionado y ventilador de techo en cada recámara, y el agua justo debajo de la terraza.</p>
         <div class="actions">
-          <button type="button" class="direct-btn" data-book="brisas">Reservar directo con Diego</button>
-          <a class="link" href="https://www.airbnb.com/rooms/1482157264577134834" target="_blank" rel="noopener" data-unit="brisas">Reservar en Airbnb</a>
+          <button type="button" class="direct-btn" data-book="brisas">Reservar directo</button>
+          <a class="link" href="https://www.airbnb.com/rooms/1482157264577134834" target="_blank" rel="noopener" data-unit="brisas">Ver en Airbnb</a>
         </div>
       </div>
     </article>
@@ -427,8 +434,8 @@
         <div class="spec"><span>2 recámaras</span><span>1 baño</span><span>Para 4</span></div>
         <p>Frente al mar, una cama queen en cada recámara y una terraza comedor sobre la arena, donde la playa se junta con las rocas.</p>
         <div class="actions">
-          <button type="button" class="direct-btn" data-book="olas">Reservar directo con Diego</button>
-          <a class="link" href="https://www.airbnb.com/rooms/1379307056800954871" target="_blank" rel="noopener" data-unit="olas">Reservar en Airbnb</a>
+          <button type="button" class="direct-btn" data-book="olas">Reservar directo</button>
+          <a class="link" href="https://www.airbnb.com/rooms/1379307056800954871" target="_blank" rel="noopener" data-unit="olas">Ver en Airbnb</a>
         </div>
       </div>
     </article>
