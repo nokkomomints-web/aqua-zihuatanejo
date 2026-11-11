@@ -54,7 +54,7 @@
     { k: ["amenities", "included", "what do you have"],
       a: `In every bungalow: ocean view, beach access, air conditioning and ceiling fans, a kitchen, wifi, a washer, a TV, and a private entrance.` },
     { k: ["book", "reserve", "reservation", "availability", "available", "dates", "calendar"],
-      a: `Booking and live availability are on Airbnb: ${book("brisas")}, ${book("oasis")}, ${book("olas")}.` },
+      a: `Two ways: live availability on Airbnb (${book("brisas")}, ${book("oasis")}, ${book("olas")}), or tap <b>Book direct with Diego</b> on any bungalow to send him your dates on WhatsApp.` },
     { k: ["price", "cost", "rate", "how much", "night", "cheap", "discount"],
       a: `Rates change by season, so the Airbnb listings have the current price for your dates: ${book("brisas")}, ${book("oasis")}, ${book("olas")}.` },
     { k: ["review", "rating", "stars"],
