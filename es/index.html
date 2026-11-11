@@ -42,8 +42,7 @@
     { "@type": "LocationFeatureSpecification", "name": "Beach access", "value": true },
     { "@type": "LocationFeatureSpecification", "name": "Ocean view", "value": true },
     { "@type": "LocationFeatureSpecification", "name": "Air conditioning", "value": true },
-    { "@type": "LocationFeatureSpecification", "name": "Kitchen", "value": true },
-    { "@type": "LocationFeatureSpecification", "name": "Washer", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "Kitchen", "value": true },
     { "@type": "LocationFeatureSpecification", "name": "Wifi", "value": true }
   ],
   "containsPlace": [
@@ -265,7 +264,85 @@
   .book .send { font-family: var(--sans); font-weight: 400; font-size: 10px; letter-spacing: .26em; text-transform: uppercase; background: var(--ink); color: var(--bone); border: 0; padding: 16px; cursor: pointer; margin-top: 4px; }
   .book .send:hover { background: var(--gold); }
   .book .fine { font-size: .8rem; color: var(--soft); margin: 0; line-height: 1.55; }
+
+  /* FAQ (11/10): native details/summary, no script. Same answers feed the FAQPage JSON-LD. */
+  .faq { padding: clamp(50px, 8vh, 110px) 0; border-top: 1px solid var(--line); }
+  .faq h2 { font-family: var(--display); font-weight: 300; font-size: clamp(1.9rem, 1.2rem + 2vw, 3rem); line-height: 1.1; margin: 18px 0 clamp(22px, 4vh, 40px); }
+  .faq details { border-bottom: 1px solid var(--line); }
+  .faq details:first-of-type { border-top: 1px solid var(--line); }
+  .faq summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 18px; padding: 18px 0; min-height: 44px; font-size: 1rem; color: var(--ink); }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: "+"; font-family: var(--display); font-size: 1.6rem; line-height: 1; color: var(--gold); transition: transform .4s var(--ease); flex: none; }
+  .faq details[open] summary::after { transform: rotate(45deg); }
+  .faq summary:focus-visible { outline: 1px solid var(--gold); outline-offset: 4px; }
+  .faq details p { margin: 0; padding: 0 0 20px; max-width: 62ch; color: #4b4740; font-size: .95rem; }
+  @media (min-width: 900px) { .faq { display: grid; grid-template-columns: .9fr 1.1fr; gap: 64px; align-items: start; } .faq h2 { margin-bottom: 0; } }
 </style>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "inLanguage": "es",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "¿A qué hora es el check-in y el check-out?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "El check-in es después de las 3:00 PM y el check-out antes de las 11:00 AM. La entrada es autónoma, con cerradura inteligente."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "¿Hay escaleras?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Sí. A los bungalows se llega por escaleras y andadores públicos compartidos, desde la playa o desde la calle Eva Sámano. Diego advierte que la zona no es adecuada para personas con movilidad reducida."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "¿Hay acceso directo a la playa?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Sí. Aqua está sobre Playa La Madera, y cada bungalow tiene acceso a la playa y vista al mar."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "¿Hay wifi y aire acondicionado?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Sí. Cada bungalow tiene wifi, y cada recámara tiene aire acondicionado y ventilador de techo."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "¿Cuántas personas caben?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Cada bungalow tiene dos recámaras y es para 4 personas. Si reservas los tres, caben hasta 12."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "¿Cómo reservo directo?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Toca \"Reservar directo con Diego\" en cualquier bungalow. Se abre WhatsApp con tus fechas escritas para Diego, el dueño, que te confirma disponibilidad y tarifa. Los tres bungalows también están en Airbnb."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "¿Qué hay cerca?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Hay restaurantes a lo largo de La Madera, y el andador lleva al muelle, de donde salen las lanchas a Playa Las Gatas y los viajes de pesca. La Plaza Municipal y el andador del centro están a unos 5 minutos a pie."
+   }
+  }
+ ]
+}
+</script>
 </head>
 <body>
 
@@ -369,7 +446,7 @@
       <ul>
         <li>Vista al mar y acceso a la playa</li>
         <li>Aire acondicionado y ventiladores de techo</li>
-        <li>Cocina y lavadora</li>
+        <li>Cocina</li>
         <li>Wifi y televisión</li>
         <li>Entrada independiente</li>
       </ul>
@@ -404,6 +481,43 @@
     <div class="map">
       <iframe title="Mapa de Playa La Madera, Zihuatanejo" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
         src="https://maps.google.com/maps?q=Playa%20La%20Madera%20Zihuatanejo&z=15&output=embed"></iframe>
+    </div>
+  </section>
+
+  <section class="wrap faq rise" id="faq" aria-labelledby="faq-title">
+    <div>
+      <div class="eyebrow">Preguntas</div>
+      <h2 id="faq-title">Antes de reservar</h2>
+    </div>
+    <div>
+      <details>
+        <summary>¿A qué hora es el check-in y el check-out?</summary>
+        <p>El check-in es después de las 3:00 PM y el check-out antes de las 11:00 AM. La entrada es autónoma, con cerradura inteligente.</p>
+      </details>
+      <details>
+        <summary>¿Hay escaleras?</summary>
+        <p>Sí. A los bungalows se llega por escaleras y andadores públicos compartidos, desde la playa o desde la calle Eva Sámano. Diego advierte que la zona no es adecuada para personas con movilidad reducida.</p>
+      </details>
+      <details>
+        <summary>¿Hay acceso directo a la playa?</summary>
+        <p>Sí. Aqua está sobre Playa La Madera, y cada bungalow tiene acceso a la playa y vista al mar.</p>
+      </details>
+      <details>
+        <summary>¿Hay wifi y aire acondicionado?</summary>
+        <p>Sí. Cada bungalow tiene wifi, y cada recámara tiene aire acondicionado y ventilador de techo.</p>
+      </details>
+      <details>
+        <summary>¿Cuántas personas caben?</summary>
+        <p>Cada bungalow tiene dos recámaras y es para 4 personas. Si reservas los tres, caben hasta 12.</p>
+      </details>
+      <details>
+        <summary>¿Cómo reservo directo?</summary>
+        <p>Toca "Reservar directo con Diego" en cualquier bungalow. Se abre WhatsApp con tus fechas escritas para Diego, el dueño, que te confirma disponibilidad y tarifa. Los tres bungalows también están en Airbnb.</p>
+      </details>
+      <details>
+        <summary>¿Qué hay cerca?</summary>
+        <p>Hay restaurantes a lo largo de La Madera, y el andador lleva al muelle, de donde salen las lanchas a Playa Las Gatas y los viajes de pesca. La Plaza Municipal y el andador del centro están a unos 5 minutos a pie.</p>
+      </details>
     </div>
   </section>
 

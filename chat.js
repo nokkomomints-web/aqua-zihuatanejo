@@ -1,7 +1,7 @@
 /* Aqua guest assistant.
  *
  * Answers questions about the property from what the three listings actually say, and hands off to
- * WhatsApp for anything it does not know (price, dates, check-in times). Deliberately no API key
+ * WhatsApp for anything it does not know (price, dates, parking). Deliberately no API key
  * and no server: this page is static, so an answer it cannot source is an answer it should not
  * invent. Every reply below traces to the Airbnb listings for Brisas, Oasis and Olas.
  *
@@ -49,10 +49,10 @@
     { k: ["air", "a/c", "ac", "hot", "fan", "conditioning"],
       a: `Every bedroom has air conditioning and a ceiling fan.` },
     { k: ["kitchen", "cook", "fridge"], a: `Yes, each bungalow has a kitchen.` },
-    { k: ["laundry", "washer", "washing"], a: `Yes, there is a washer.` },
+    { k: ["laundry", "washer", "washing"], a: `There is no washer in the bungalows. The listings note a laundromat nearby.` },
     { k: ["tv", "television"], a: `Yes, each bungalow has a TV.` },
     { k: ["amenities", "included", "what do you have"],
-      a: `In every bungalow: ocean view, beach access, air conditioning and ceiling fans, a kitchen, wifi, a washer, a TV, and a private entrance.` },
+      a: `In every bungalow: ocean view, beach access, air conditioning and ceiling fans, a kitchen, wifi, a TV, and a private entrance.` },
     { k: ["book", "reserve", "reservation", "availability", "available", "dates", "calendar"],
       a: `Two ways: live availability on Airbnb (${book("brisas")}, ${book("oasis")}, ${book("olas")}), or tap <b>Book direct with Diego</b> on any bungalow to send him your dates on WhatsApp.` },
     { k: ["price", "cost", "rate", "how much", "night", "cheap", "discount"],
@@ -64,7 +64,7 @@
     { k: ["park", "parking", "car", "rental car", "drive"],
       a: `I don't have parking details on file. Diego can tell you what is available on WhatsApp.` },
     { k: ["check in", "checkin", "check out", "checkout", "arrival", "arrive", "time"],
-      a: `Check-in and check-out times are on each Airbnb listing, and Diego can confirm anything specific on WhatsApp.` },
+      a: `Check-in is after 3:00 PM and check-out is before 11:00 AM, with self check-in by smart lock. Diego can confirm anything specific on WhatsApp.` },
     { k: ["airport", "zih", "taxi", "transfer", "getting here", "get there"],
       a: `Zihuatanejo has its own airport (ZIH). For transfers and directions, message Diego on WhatsApp.` },
     { k: ["pool", "swim"],
